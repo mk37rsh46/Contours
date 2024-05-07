@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contour Graph Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Contour Graph Generator</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="file" class="file-label">Choose CSV File:</label>
+        <input type="file" name="file" id="file">
+        <label for="graphType">Graph Type:</label>
+        <select name="graphType" id="graphType">
+        
+            <option value="contourf">Contourf</option>
+            <option value="contour">Contour</option>
+            <option value="3d">3D Surface Plot</option>
+        </select>
+        <label for="interpolationType">Interpolation Type:</label>
+        <select name="interpolationType" id="interpolationType" >
+            <option value="linear">Linear</option>
+            <option value="nearest">Nearest Neighbor</option>
+        </select>
+        <input type="button" value="Create" onclick="submitForm()">
+    </form>
+    <div id="status"></div>
+    <div id="graphContainer"></div>
+
+    <script>
+        function submitForm() {
+            var form = document.getElementById("uploadForm");
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/upload");
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("status").innerText = response.status;
+                    document.getElementById("graphContainer").innerHTML = response.graph;
+                } else {
+                    console.error("Error:", xhr.statusText);
+                }
+            };
+            xhr.send(formData);
+        }
+
+  </script>
+</body>
+</html>

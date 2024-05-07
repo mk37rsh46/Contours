@@ -1,0 +1,12 @@
+.DS_Store
+venv/
+env/
+.venv/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.env
+.env.local
+.vscode/
+-
