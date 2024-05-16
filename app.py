@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import gen_graph
 import io
+import gen_pdf
 
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'pwdkey'
@@ -26,6 +27,16 @@ def upload():
     except Exception as e:
          return jsonify( status="Problem Creating", graph="")
 
+@app.route('/report', methods=['POST'])
+def report():
+    file = request.files['file']
+    try:
+        csv_data = io.StringIO(file.stream.read().decode('UTF8'), newline=None)
+        gen_pdf.create_report(csv_data)
+        return send_file("sample.pdf", as_attachment=True)
+
+    except Exception as e:
+         return jsonify( status="Problem Creating")
 
 
 if __name__ == '__main__':

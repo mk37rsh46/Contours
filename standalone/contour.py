@@ -18,8 +18,8 @@ with open('20240411_Deeper_Sonar_120_min_05.csv', 'r') as csvfile:
     indices_to_keep = data_array[:, 0] != ''
     data_array = data_array[indices_to_keep][:, :3]
     data_array = data_array.astype(float)
-    longitude = data_array[:, 0]
-    latitude = data_array[:, 1]
+    latitude = data_array[:, 0]
+    longitude = data_array[:, 1]
     depth = data_array[:, 2]
 
     #Interpolate to add missing values
@@ -42,4 +42,8 @@ with open('20240411_Deeper_Sonar_120_min_05.csv', 'r') as csvfile:
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
     plt.title('Contour Plot of Depth')
+    cs = plt.contour(lon_mesh, lat_mesh, depth_interp, colors='k')
+    plt.clabel(cs, inline=True, fontsize=8)
+    plt.gca().xaxis.set_major_formatter(plt.FormatStrFormatter('%0.4f'))
+    plt.gca().yaxis.set_major_formatter(plt.FormatStrFormatter('%0.4f'))
     plt.show()
