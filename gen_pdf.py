@@ -48,7 +48,6 @@ def create_report(csv_data):
     c.drawString(100, 460, "Depth Statistics:")
     for i, (key, value) in enumerate(depth_stats.items()):
         c.drawString(120, 440 - i * 15, f"{key}: {value}")
-    c.save()
 
 
 
