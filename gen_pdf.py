@@ -34,6 +34,7 @@ def create_report(csv_data):
     c.setAuthor("Keshav")
 
     title = "Statistical Report"
+    c.setTitle(title)
     c.setFont("Helvetica-Bold", 18)
     title_width = c.stringWidth(title)
     x = (letter[0] - title_width) / 2
