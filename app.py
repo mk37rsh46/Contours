@@ -33,7 +33,7 @@ def report():
     try:
         csv_data = io.StringIO(file.stream.read().decode('UTF8'), newline=None)
         gen_pdf.create_report(csv_data)
-        return send_file("sample.pdf", as_attachment=True)
+        return send_file("rep.pdf", as_attachment=True)
 
     except Exception as e:
          return jsonify( status="Problem Creating")

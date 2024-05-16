@@ -30,7 +30,7 @@ def create_report(csv_data):
     longitude_stats = stats(longitude)
     depth_stats = stats(depth)
 
-    c = canvas.Canvas("sample.pdf", pagesize=letter)
+    c = canvas.Canvas("rep.pdf", pagesize=letter)
     c.setAuthor("Keshav")
 
     title = "Statistical Report"
@@ -48,6 +48,7 @@ def create_report(csv_data):
     c.drawString(100, 460, "Depth Statistics:")
     for i, (key, value) in enumerate(depth_stats.items()):
         c.drawString(120, 440 - i * 15, f"{key}: {value}")
+    c.save()
 
 
 
