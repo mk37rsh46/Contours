@@ -31,7 +31,7 @@ with open('20240411_Deeper_Sonar_120_min_05.csv', 'r') as csvfile:
     longitude_stats = stats(longitude)
     depth_stats = stats(depth)
 
-    c = canvas.Canvas("sample.pdf", pagesize=letter)
+    c = canvas.Canvas("rep.pdf", pagesize=letter)
     c.setAuthor("Keshav")
     title = "Statistical Report"
     c.setFont("Helvetica-Bold", 18)
