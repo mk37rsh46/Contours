@@ -75,7 +75,6 @@ def create_contour_graph(csv_data, graph_type, interpolation_type):
     labels = ax.clabel(cs, inline=True, fmt='%1.1f', fontsize=10, colors='black',
                    inline_spacing=5, use_clabeltext=True)
 
-# Customize each label to have a white background
     for label in labels:
         label.set_bbox(dict(facecolor='white', edgecolor='none', pad=1))
 
