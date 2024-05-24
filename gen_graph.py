@@ -72,7 +72,12 @@ def create_contour_graph(csv_data, graph_type, interpolation_type):
     ax.set_ylabel('Longitude')
     ax.set_title('Contour Plot of Depth')
     cs = ax.contour(lon_mesh, lat_mesh, depth_interp, colors='k')
-    ax.clabel(cs, inline=True, fontsize=8)
+    labels = ax.clabel(cs, inline=True, fmt='%1.1f', fontsize=10, colors='black',
+                   inline_spacing=5, use_clabeltext=True)
+
+# Customize each label to have a white background
+    for label in labels:
+        label.set_bbox(dict(facecolor='white', edgecolor='none', pad=1))
 
     ax.xaxis.set_major_formatter(plt.FormatStrFormatter('%0.4f'))
     ax.yaxis.set_major_formatter(plt.FormatStrFormatter('%0.4f'))
