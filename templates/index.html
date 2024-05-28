@@ -51,13 +51,10 @@
                     a.download = `${nm}report.pdf`;
                     document.body.appendChild(a);
                     a.click();
-                    // Remove the link element from the DOM
                     document.body.removeChild(a);
-                    // Revoke the blob URL
                     URL.revokeObjectURL(url);
                 }
             };
-            // Send form data to the server
             xhr.send(formData);
         }
         function generateCSV() {
@@ -78,13 +75,10 @@
                     a.download = `${nm}summary.csv`;
                     document.body.appendChild(a);
                     a.click();
-                    // Remove the link element from the DOM
                     document.body.removeChild(a);
-                    // Revoke the blob URL
                     URL.revokeObjectURL(url);
                 }
             };
-            // Send form data to the server
             xhr.send(formData);
         }
         
