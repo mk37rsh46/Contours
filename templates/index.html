@@ -25,6 +25,8 @@
         </select>
         <input type="button" value="Create Graph" onclick="submitForm()">
         <input type="button" value="Generate Report" onclick="generateReport()">
+        <input type="button" value="Generate CSV" onclick="generateCSV()">
+
 
     </form>
     <div id="status"></div>
@@ -58,6 +60,34 @@
             // Send form data to the server
             xhr.send(formData);
         }
+        function generateCSV() {
+            var form = document.getElementById("uploadForm");
+            var formData = new FormData(form);
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/csvrep");
+            xhr.responseType = "blob";  
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var blob = new Blob([xhr.response], {type: "application/pdf"});
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement("a");
+                    a.href = url;
+                    var fil = document.getElementById("file_download")
+                    var nm = fil.files[0]["name"].split(".")[0]
+                    a.download = `${nm}summary.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    // Remove the link element from the DOM
+                    document.body.removeChild(a);
+                    // Revoke the blob URL
+                    URL.revokeObjectURL(url);
+                }
+            };
+            // Send form data to the server
+            xhr.send(formData);
+        }
+        
         function submitForm() {
             var form = document.getElementById("uploadForm");
             var formData = new FormData(form);

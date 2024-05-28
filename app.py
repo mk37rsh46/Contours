@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, send_file
 import gen_graph
 import io
 import gen_pdf
+import gen_csv
 
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'pwdkey'
@@ -38,6 +39,17 @@ def report():
     except Exception as e:
          return jsonify( status="Problem Creating")
 
+@app.route('/csvrep', methods=['POST'])
+def csv_create():
+    file = request.files['file']
+    try:
+        csv_data = io.StringIO(file.stream.read().decode('UTF8'), newline=None)
+        gen_csv.create_report(csv_data)
+        return send_file("sample.csv", as_attachment=True)
+
+    except Exception as e:
+         print(e)
+         return jsonify( status="Problem Creating")
 
 if __name__ == '__main__':
     app.run(debug=True)
